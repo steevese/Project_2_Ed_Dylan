@@ -12,6 +12,7 @@
 #include "temperature_sensor.h"
 #include "gas_sensor.h"
 #include "event_log.h"
+#include "matrix_keypad.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -38,7 +39,7 @@ char codeSequenceFromPcSerialCom[CODE_NUMBER_OF_KEYS];
 static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
 static bool codeComplete = false;
 static int numberOfCodeChars = 0;
-
+extern char correctCode[4];
 //=====[Declarations (prototypes) of private functions]========================
 
 static void pcSerialComStringRead( char* str, int strLength );
@@ -59,6 +60,7 @@ static void commandShowCurrentTemperatureInFahrenheit();
 static void commandSetDateAndTime();
 static void commandShowDateAndTime();
 static void commandShowStoredEvents();
+static void commandGatedPasscode();
 
 //=====[Implementations of public functions]===================================
 
@@ -166,6 +168,7 @@ static void pcSerialComCommandUpdate( char receivedChar )
         case 's': case 'S': commandSetDateAndTime(); break;
         case 't': case 'T': commandShowDateAndTime(); break;
         case 'e': case 'E': commandShowStoredEvents(); break;
+        case 'p': case 'P': commandGatedPasscode(); break;
         default: availableCommands(); break;
     } 
 }
@@ -183,6 +186,7 @@ static void availableCommands()
     pcSerialComStringWrite( "Press 's' or 'S' to set the date and time\r\n" );
     pcSerialComStringWrite( "Press 't' or 'T' to get the date and time\r\n" );
     pcSerialComStringWrite( "Press 'e' or 'E' to get the stored events\r\n" );
+    pcSerialComStringWrite( "Press 'p' or 'P' to get the gated entry passcode\r\n" );
     pcSerialComStringWrite( "\r\n" );
 }
 
@@ -307,4 +311,9 @@ static void commandShowStoredEvents()
         pcSerialComStringWrite( str );   
         pcSerialComStringWrite( "\r\n" );                    
     }
+}
+static void commandGatedPasscode(){
+    pcSerialComStringWrite("Passcode: ");
+    pcSerialComStringWrite("1234");
+    pcSerialComStringWrite( "\r\n" );  
 }

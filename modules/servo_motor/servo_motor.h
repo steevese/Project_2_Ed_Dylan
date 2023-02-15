@@ -1,20 +1,21 @@
 //=====[#include guards - begin]===============================================
 
-#ifndef _MATRIX_KEYPAD_H_
-#define _MATRIX_KEYPAD_H_
+
+#ifndef _SERVO_MOTOR_H_
+#define _SERVO_MOTOR_H_
+
 
 //=====[Declaration of public defines]=========================================
+
 
 //=====[Declaration of public data types]======================================
 
 //=====[Declarations (prototypes) of public functions]=========================
 
-void matrixKeypadInit( int updateTime_ms );
-char matrixKeypadUpdate();
-bool isCorrectCode();
-void messageDispay();
-
+void initMotor();
+void mainMotor();
 
 //=====[#include guards - end]=================================================
 
-#endif // _MATRIX_KEYPAD_H_
+
+#endif // _SERVO_MOTOR_H_
