@@ -1,5 +1,6 @@
 //=====[Libraries]=============================================================
 
+#include "display.h"
 #include "mbed.h"
 #include "arm_book_lib.h"
 
@@ -53,6 +54,7 @@ bool codeMatchFrom( codeOrigin_t codeOrigin )
                 userInterfaceCodeCompleteWrite(false);
                 if ( codeIsCorrect ) {
                     codeDeactivate();
+
                 } else {
                     incorrectCodeStateWrite(ON);
                     numberOfIncorrectCodes++;
