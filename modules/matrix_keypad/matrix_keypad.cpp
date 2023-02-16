@@ -162,13 +162,13 @@ static char matrixKeypadScan()
    }
    return '\0';
 }
-static void displayEnteredCode(char keypadChar){
+static void displayEnteredCode(char keypadChar){ // Displays entered code and checks if code is correct or incorrect
    char codeString[10];
-   bool key1 = false;
+   bool key1 = false; // these 4 keys represent the 4 presses of the key pad
    bool key2 = false;
    bool key3 = false;
    bool key4 = false;
-    if ( attemptedPassword < 4 ) {
+    if ( attemptedPassword < 4 ) {// Cuts code off after a certain number of tries (says 4 but we wrote the code to only allow 3)
         if ( countCodeKeys < 4 ){
         enteredCode[countCodeKeys] = keypadChar;
         displayCharPositionWrite ( 0,0 );
@@ -184,7 +184,7 @@ static void displayEnteredCode(char keypadChar){
   
        countCodeKeys++;
         if (countCodeKeys == 4){
-            attemptedPassword++;
+            attemptedPassword++; // ads an attemt after every time 4 keys are pressed
       
             for (int i = 0; i < 4; i++){
    //check to see if each entered character equals the corresponding Correct Code Character
@@ -203,7 +203,7 @@ static void displayEnteredCode(char keypadChar){
                     }
                 } 
             }
-            if(key1&&key2&&key3&&key4){
+            if(key1&&key2&&key3&&key4){ // if all 4 keys match the code is correct
                 correctCodeState = true;
                 for (int i =0; i < 4; i++){
                     enteredCode[i] = 0;
@@ -216,7 +216,7 @@ static void displayEnteredCode(char keypadChar){
                 mainMotor();
             }
                  
-            else {
+            else { // if any of the keys do not match it is false and resets all the keys
                 correctCodeState = false;
                 bool key1 = false;
                 bool key2 = false;
@@ -229,7 +229,7 @@ static void displayEnteredCode(char keypadChar){
                 for (int i =0; i < 4; i++){
                     enteredCode[i] = 0;
                     }
-                if (attemptedPassword == 1){
+                if (attemptedPassword == 1){ // first attempt
                     displayCharPositionWrite ( 0,0 );
                     displayStringWrite("Incorrect!     ");
                     displayCharPositionWrite ( 0,1 );
@@ -240,7 +240,7 @@ static void displayEnteredCode(char keypadChar){
                     displayStringWrite("Code:           ");
                       
                 }
-                if (attemptedPassword == 2){
+                if (attemptedPassword == 2){ // second attempt
                     displayCharPositionWrite ( 0,0 );
                     displayStringWrite("Incorrect!     ");
                     displayCharPositionWrite ( 0,1 );
@@ -250,45 +250,19 @@ static void displayEnteredCode(char keypadChar){
                     displayCharPositionWrite ( 0,0 );
                     displayStringWrite("Code:           ");
                 }
-                if (attemptedPassword == 3){
-                    attemptedPassword++;
+                if (attemptedPassword == 3){ // third and final attempt
+                    attemptedPassword++; // this is what makes the final attempt over the attempt limit and lock out the code
                     displayCharPositionWrite ( 0,0 );
                     displayStringWrite("Incorrect!     ");
                     displayCharPositionWrite ( 0,1 );
                     displayStringWrite("System Disabled   "); 
                 }
             }
-            }
-                
         }
-   // delay(5000);
+                
+    }
 }
 
-// void messageDisplay();
-// {
-  //  if (correctCodeState)
-   // {
-    //   displayCharPositionWrite ( 0,0 );
-     //  displayStringWrite("Congratulations ");
-     //  displayCharPositionWrite ( 0,1 );
-     //  displayStringWrite("Gate is open    ");
-// } 
- // else {
-   //    displayCharPositionWrite ( 0,0 );
-   //    displayCharPositionWrite ( 0,1 );   
-   //    displayStringWrite("2 more tries   ");
-// }
-// }
-// void resetCode();
-// {
-   // for (int i =0; i < 4; i++){
-  // enteredCode[i] = 0;
-  // }
- // }
-// static void incorrectPasswordIndicatorUpdate()
-// {
- //  incorrectPassword = incorrectPasswordState;
-// }
  static void matrixKeypadReset()
 {
    matrixKeypadState = MATRIX_KEYPAD_SCANNING;

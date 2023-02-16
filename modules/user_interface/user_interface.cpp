@@ -129,7 +129,7 @@ static void userInterfaceMatrixKeypadUpdate()
     }
 }
 
-static void userInterfaceDisplayInit()
+static void userInterfaceDisplayInit() // initial characters shown on the LCD Display
 {
     displayInit();
      
@@ -146,37 +146,7 @@ static void userInterfaceDisplayUpdate()
     static int accumulatedDisplayTime = 0;
     char temperatureString[3] = "";
     
-    // if( accumulatedDisplayTime >=
-    //     DISPLAY_REFRESH_TIME_MS ) {
-
-    //     accumulatedDisplayTime = 0;
-
-    //     sprintf(temperatureString, "%.0f", temperatureSensorReadCelsius());
-    //     displayCharPositionWrite ( 12,0 );
-    //     displayStringWrite( temperatureString );
-    //     displayCharPositionWrite ( 14,0 );
-    //     displayStringWrite( "'C" );
-
-    //     displayCharPositionWrite ( 4,1 );
-
-    //     if ( gasDetectorStateRead() ) {
-    //         displayStringWrite( "Detected    " );
-    //     } else {
-    //         displayStringWrite( "Not Detected" );
-    //     }
-
-    //     displayCharPositionWrite ( 6,2 );
-        
-    //     if ( sirenStateRead() ) {
-    //         displayStringWrite( "ON " );
-    //     } else {
-    //         displayStringWrite( "OFF" );
-    //     }
-
-    // } else {
-    //     accumulatedDisplayTime =
-    //         accumulatedDisplayTime + SYSTEM_TIME_INCREMENT_MS;        
-    // } 
+    
 }
 
 static void incorrectCodeIndicatorUpdate()

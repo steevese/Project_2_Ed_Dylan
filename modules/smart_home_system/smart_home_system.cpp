@@ -32,7 +32,7 @@ void smartHomeSystemInit()
     userInterfaceInit();
     fireAlarmInit();
     pcSerialComInit();
-    initMotor();
+    initMotor(); // initializes motor
 }
 
 void smartHomeSystemUpdate()

@@ -9,8 +9,8 @@
 //=====[Declaration of private defines]========================================
 
 
-#define DUTY_MIN 0.025
-#define DUTY_MAX 0.067
+#define DUTY_MIN 0.025 // low limit that sets the motor to position 0
+#define DUTY_MAX 0.067 // voltage value that rotates the motor 90 degrees from the original position
 #define PERIOD 0.02
 
 
@@ -47,21 +47,21 @@ void mainMotor();
 
 
 
-void initMotor()
+void initMotor() // initializes the motor
 {
 servo.period(PERIOD); // 20ms period
 servo.write(DUTY_MIN);
 }
 
 
-void mainMotor()
+void mainMotor() // function that moves the gate
 {
 
 
-servo.write(DUTY_MIN);
-delay(2000);
-servo.write(DUTY_MAX);
-delay(2000);
-servo.write(DUTY_MIN);
-delay(2000);
+servo.write(DUTY_MIN); // start at position 0
+delay(2000); // wait 2 seconds
+servo.write(DUTY_MAX); // rotate 90 degrees
+delay(2000); // wait 2 seconds
+servo.write(DUTY_MIN); // go back to position 0
+delay(2000); // wait 2 seconds
 }

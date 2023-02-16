@@ -60,7 +60,7 @@ static void commandShowCurrentTemperatureInFahrenheit();
 static void commandSetDateAndTime();
 static void commandShowDateAndTime();
 static void commandShowStoredEvents();
-static void commandGatedPasscode();
+static void commandGatedPasscode(); // new function that displays gate passcode
 
 //=====[Implementations of public functions]===================================
 
@@ -168,7 +168,7 @@ static void pcSerialComCommandUpdate( char receivedChar )
         case 's': case 'S': commandSetDateAndTime(); break;
         case 't': case 'T': commandShowDateAndTime(); break;
         case 'e': case 'E': commandShowStoredEvents(); break;
-        case 'p': case 'P': commandGatedPasscode(); break;
+        case 'p': case 'P': commandGatedPasscode(); break; // if p or P is pressed the gate code will be shown
         default: availableCommands(); break;
     } 
 }
@@ -186,7 +186,7 @@ static void availableCommands()
     pcSerialComStringWrite( "Press 's' or 'S' to set the date and time\r\n" );
     pcSerialComStringWrite( "Press 't' or 'T' to get the date and time\r\n" );
     pcSerialComStringWrite( "Press 'e' or 'E' to get the stored events\r\n" );
-    pcSerialComStringWrite( "Press 'p' or 'P' to get the gated entry passcode\r\n" );
+    pcSerialComStringWrite( "Press 'p' or 'P' to get the gated entry passcode\r\n" ); // tells user that pressing p or P will show them the gate code
     pcSerialComStringWrite( "\r\n" );
 }
 
@@ -312,7 +312,7 @@ static void commandShowStoredEvents()
         pcSerialComStringWrite( "\r\n" );                    
     }
 }
-static void commandGatedPasscode(){
+static void commandGatedPasscode(){ // new function that prints the pascode to the user
     pcSerialComStringWrite("Passcode: ");
     pcSerialComStringWrite("1234");
     pcSerialComStringWrite( "\r\n" );  

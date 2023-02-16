@@ -229,7 +229,7 @@ static void displayDataBusWrite( uint8_t dataBus )
     delay( 1 );                   
 }
 
-void displayCode(char enteredCode [], int startingCodeIndex){
+void displayCode(char enteredCode [], int startingCodeIndex){ // function that allows us to diplay the code on the LCD Display
 
     char codeString[10];
 
@@ -237,7 +237,7 @@ void displayCode(char enteredCode [], int startingCodeIndex){
     displayStringWrite("Code:           ");
     // char codeString[10];
 
-    for (int i = 0; i < 4; i++){
+    for (int i = 0; i < 4; i++){ // Displays the next 4 keys pressed after the "Code:" on the LCD display
     char keyPadKey = enteredCode[i];
     sprintf(codeString, "%c", keyPadKey);
     displayCharPositionWrite ( i+startingCodeIndex,0);
